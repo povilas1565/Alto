@@ -1,4 +1,4 @@
-# HttpHub: Simple HTTP Web Server
+# Alto: Simple Image/Video Loader
 
 A modern Django-based web application that allows multiple users to register, log in, and manage their own media content (images, videos, audio). The project features a user-friendly interface for uploading, viewing, and managing media files, with robust authentication and authorization.
 
