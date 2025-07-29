@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Your Dashboard{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Your Dashboard</h2>
+            <a href="{% url 'media_uploads:upload_media' %}" class="btn btn-primary">Upload New Media</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>Your Uploads</h3>
+            </div>
+            <div class="card-body">
+                {% if media_files %}
+                    <div class="row">
+                    {% for media in media_files %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ media.title }}</h5>
+                                    <p class="card-text">{{ media.caption|truncatechars:100 }}</p>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            Type: {{ media.get_media_type_display }} | 
+                                            {% if media.is_public %}Public{% else %}Private{% endif %} |
+                                            Uploaded: {{ media.uploaded_at|date:"M d, Y" }}
+                                        </small>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{% url 'media_uploads:media_detail' media.pk %}" class="btn btn-sm btn-info">View</a>
+                                    <a href="{% url 'media_uploads:delete_media' media.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% else %}
+                    <p>You haven't uploaded any media yet. Click the "Upload New Media" button to get started.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

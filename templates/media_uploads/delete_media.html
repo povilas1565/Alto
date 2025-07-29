@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Delete Media{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2>Delete Media</h2>
+            </div>
+            <div class="card-body">
+                <h4>Are you sure you want to delete "{{ media.title }}"?</h4>
+                <p>This action cannot be undone.</p>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    <a href="{% url 'media_uploads:media_detail' media.pk %}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
